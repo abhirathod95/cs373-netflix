@@ -1,0 +1,12 @@
+# Ignore everything
+*
+
+# All the files to include the rest should be excluded
+!.gitignore
+!.travis.yml
+!makefile
+!*Netflix.py
+!*.in
+!*.out
+!Netflix.html
+!Netflix.log

@@ -1,0 +1,16 @@
+language: python
+python:
+  - "3.5"
+
+install:
+  - pip install --upgrade pip
+  - pip --version
+  - pip install coverage
+  - pip install numpy
+
+script:
+  - make test
+
+before_script:
+  - chmod +x RunNetflix.py
+  - chmod +x TestNetflix.py
