@@ -7,6 +7,7 @@ install:
   - pip --version
   - pip install coverage
   - pip install numpy
+  - pip install requests
 
 script:
   - make test
