@@ -9,6 +9,7 @@ before_install:
     - pip install --upgrade pip
 
 install:
+	- pip install requests
     - pip install autopep8
     - pip install coverage
     - pip install numpy
