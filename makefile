@@ -31,8 +31,8 @@ RunNetflix.tmp: RunNetflix.in RunNetflix.out RunNetflix.py
 	diff RunNetflix.tmp RunNetflix.out
 
 TestNetflix.tmp: TestNetflix.py
-	-pylint Netflix.py
-	-pylint TestNetflix.py
+	#-pylint Netflix.py
+	#-pylint TestNetflix.py
 	python3.5 -m coverage run    --branch TestNetflix.py >  TestNetflix.tmp 2>&1
 	python3.5 -m coverage report -m --omit=/lusr/lib/python3.5/dist-packages/*,/home/travis/virtualenv/python3.5.0/lib/python3.5/site-packages/* >> TestNetflix.tmp
 	cat TestNetflix.tmp 					 >  TestNetflix.out
