@@ -1,3 +1,9 @@
+commit 9a82e32e9e377d80711c1550f1fc57e038d1519c
+Author: Abhirajsinh Rathod <starlord@cs.utexas.edu>
+Date:   Thu Sep 22 02:36:58 2016 -0500
+
+    Added in acceptance cases back that were deleted somewhere earlier.
+
 commit be2f98bc7341fbe99846e8548b784af47778d9a6
 Author: Abhirajsinh Rathod <starlord@cs.utexas.edu>
 Date:   Thu Sep 22 02:32:45 2016 -0500

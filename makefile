@@ -7,10 +7,10 @@ FILES :=                              \
     RunNetflix.py                     \
     TestNetflix.out                   \
     TestNetflix.py                    \
- #   netflix-tests/ajr3334-RunCollatz.in   \
- #   netflix-tests/ajr3334-RunCollatz.out  \
- #   netflix-tests/ajr3334-TestCollatz.out \
- #   netflix-tests/ajr3334-TestCollatz.py  \
+    netflix-tests/ajr3334-aaj742-RunNetflix.in \
+    netflix-tests/ajr3334-aaj742-RunNetflix.out  \
+    netflix-tests/ajr3334-aaj742-TestNetflix.out \
+    netflix-tests/ajr3334-aaj742-TestNetflix.py  \
 
 .pylintrc:
 	pylint --disable=bad-whitespace,missing-docstring,pointless-string-statement --reports=n --generate-rcfile > $@
@@ -27,8 +27,7 @@ Netflix.log:
 RunNetflix.tmp: RunNetflix.in RunNetflix.out RunNetflix.py
 	-pylint Netflix.py
 	-pylint RunNetflix.py
-	python3.5 RunNetflix.py < RunNetflix.in > RunNetflix.tmp
-	#diff RunNetflix.tmp RunNetflix.out
+	python3.5 RunNetflix.py < RunNetflix.in > RunNetflix.out
 
 TestNetflix.tmp: TestNetflix.py
 	-pylint Netflix.py
