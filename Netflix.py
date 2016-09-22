@@ -4,7 +4,6 @@ import requests
 from numpy import mean, sqrt, square, subtract
 
 curr_mov_id = -1
-movie = False
 actual = []
 predicted = []
 
@@ -28,24 +27,24 @@ def netflix_read(line):
 		try:
 			num = int(ids[0])
 		except Exception as e:
-			return -1
+			return (-1, None)
 		# Make sure its within a valid range for movie ids
 		if num < 1 or num > 17770:
-			return -1
+			return (-1, None)
 		curr_mov_id = num
 		movie = True
-		return num
+		return (num, True)
 	else:
 		line = line.strip()
 		# Make sure its an int 
 		try:
 			num = int(line)
 		except Exception as e:
-			return -1
+			return (-1, None)
 		# Make sure that its within the range of the customer ids
 		if num < 1 or num > 2649429:
-			return -1
-		return num
+			return (-1, None)
+		return (num, False)
 
 
 def rmse(act, pred):
@@ -93,7 +92,6 @@ def netflix_print(w, movieFlag, i):
 	"""
 	if movieFlag:
 		w.write(str(i) + ":\n")
-		movie = False
 	else:
 		w.write(str(i) + "\n")
 
@@ -102,9 +100,9 @@ def netflix_solve(r, w):
 	r a reader
 	w a writer
 	"""
-	global actual, predicted, movie
+	global actual, predicted
 	for s in r:
-		i = netflix_read(s)
+		i, movie = netflix_read(s)
 		if i != -1 and curr_mov_id != -1:
 			if not movie:
 				i = netflix_eval(i)
