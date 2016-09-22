@@ -91,4 +91,4 @@ versions:
 	pylint --version
 	pydoc3 --version
 
-test: scrub Netflix.html Netflix.log RunNetflix.tmp TestNetflix.tmp netflix-tests check
+test: Netflix.html Netflix.log RunNetflix.tmp TestNetflix.tmp netflix-tests check
