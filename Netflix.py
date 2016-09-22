@@ -84,16 +84,14 @@ def netflix_eval(customer_id):
 
 	return pred
 
-def netflix_print(w, i):
+def netflix_print(w, movieFlag, i):
 	"""
 	print three ints
 	w a writer
 	i the movie id
 	j the customer id
 	"""
-	global movie
-
-	if movie:
+	if movieFlag:
 		w.write(str(i) + ":\n")
 		movie = False
 	else:
@@ -104,12 +102,12 @@ def netflix_solve(r, w):
 	r a reader
 	w a writer
 	"""
-	global actual, predicted
+	global actual, predicted, movie
 	for s in r:
 		i = netflix_read(s)
 		if i != -1 and curr_mov_id != -1:
 			if not movie:
 				i = netflix_eval(i)
-			netflix_print(w, i)
+			netflix_print(w, movie, i)
 	calculated_rmse = rmse(actual, predicted)
 	print('RMSE: {0:.2f}'.format(calculated_rmse))
