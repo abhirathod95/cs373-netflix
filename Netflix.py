@@ -81,7 +81,7 @@ def netflix_eval(customer_id):
 	except Exception as e:
 		return -1
 
-	pred = '{0:.2f}'.format(int(pred*100)/float(100))
+	pred = '{0:.1f}'.format(int(pred*100)/float(100))
 	pred = float(pred)
 
 	actual.append(actual_custmovid[(customer_id, curr_mov_id)])
