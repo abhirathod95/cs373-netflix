@@ -1,3 +1,9 @@
+commit 5faee31ba3d9d827ba962e90170c519a762afdc7
+Author: Abhirajsinh Rathod <starlord@cs.utexas.edu>
+Date:   Thu Sep 22 02:28:08 2016 -0500
+
+    Removed scrub from makefile. Should fix #21
+
 commit 48f391f512c0fcc7fbccfce7baa34f40bea1d546
 Author: Abhirajsinh Rathod <starlord@cs.utexas.edu>
 Date:   Thu Sep 22 02:23:55 2016 -0500

@@ -7,6 +7,7 @@ curr_mov_id = -1
 actual = []
 predicted = []
 
+# Get all the caches that we need
 bytes = requests.get(
     'http://www.cs.utexas.edu/users/fares/netflix-caches/snm2235-jml4759-actualCustomerRating.pickle').content
 actual_custmovid = pickle.loads(bytes)
@@ -17,16 +18,21 @@ bytes = requests.get(
     'http://www.cs.utexas.edu/users/fares/netflix-caches/snm2235-jml4759-averageMovieRating.pickle').content
 avgmov_movid = pickle.loads(bytes)
 
+
 base_all_mov = 0
 base_all_cust = 0
+
+# Go through all the mean ratings for all movies and find the mean of means
 for rating in avgmov_movid.values():
     base_all_mov += rating
 base_all_mov = base_all_mov / len(avgmov_movid.values())
 
+# Go through all the mean ratings for all customer ratings and find the mean of means
 for rating in avgcust_custid.values():
     base_all_cust += rating
 base_all_cust = base_all_cust / len(avgcust_custid.values())
 
+# Create a baseline to check how far the customer/movie deviates from the average
 baseline = (base_all_mov + base_all_cust) / 2
 
 
@@ -97,13 +103,19 @@ def netflix_eval(customer_id):
     global actual, predicted
 
     try:
+    	# Subtract the mean movie rating from the base movie rating (mean of means) to 
+    	# get the offset of how this movie compares to all the other movies
         mov_offset = base_all_mov - avgmov_movid[curr_mov_id]
+        # Subtract the mean customer rating from the base customer rating (mean of means) to 
+    	# get the offset of how this customer compares to all the other customers
         cust_offset = base_all_cust - avgcust_custid[customer_id]
 
+        # Predict the baseline and subtract the offsets
         pred = baseline - cust_offset - mov_offset
     except Exception as e:
         return -1
 
+    # We want it in 1 decimal format
     pred = '{0:.1f}'.format(int(pred * 100) / float(100))
     pred = float(pred)
     actual.append(actual_custmovid[(customer_id, curr_mov_id)])
