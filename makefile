@@ -90,5 +90,4 @@ versions:
 	coverage --version
 	pylint --version
 
-#test: scrub Netflix.html Netflix.log RunNetflix.tmp TestNetflix.tmp netflix-tests check
-test: scrub TestNetflix.tmp RunNetflix.tmp
+test: scrub Netflix.html Netflix.log RunNetflix.tmp TestNetflix.tmp netflix-tests check

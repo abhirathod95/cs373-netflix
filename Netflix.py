@@ -14,6 +14,18 @@ avgcust_custid = pickle.loads(bytes)
 bytes = requests.get('http://www.cs.utexas.edu/users/fares/netflix-caches/snm2235-jml4759-averageMovieRating.pickle').content
 avgmov_movid = pickle.loads(bytes)
 	
+base_all_mov = 0
+base_all_cust = 0
+for rating in avgmov_movid.values():
+	base_all_mov += rating
+base_all_mov = base_all_mov / len(avgmov_movid.values())
+
+for rating in avgcust_custid.values():
+	base_all_cust += rating
+base_all_cust = base_all_cust / len(avgcust_custid.values())
+
+baseline = (base_all_mov + base_all_cust) / 2
+
 def netflix_read(line):
 	"""
 	read the line from input
@@ -74,16 +86,15 @@ def netflix_eval(customer_id):
 	global actual, predicted
 
 	try:
-		avg_mov_rating = avgmov_movid[curr_mov_id]
-		avg_cust_rating = avgcust_custid[customer_id]
+		mov_offset = base_all_mov - avgmov_movid[curr_mov_id]
+		cust_offset = base_all_cust - avgcust_custid[customer_id]
 
-		pred = (avg_cust_rating + avg_mov_rating) / 2
+		pred = baseline - cust_offset - mov_offset 
 	except Exception as e:
 		return -1
 
 	pred = '{0:.1f}'.format(int(pred*100)/float(100))
 	pred = float(pred)
-
 	actual.append(actual_custmovid[(customer_id, curr_mov_id)])
 	predicted.append(pred)
 
@@ -115,4 +126,4 @@ def netflix_solve(r, w):
 			if i != -1:
 				netflix_print(w, movie, i)
 	calculated_rmse = rmse(actual, predicted)
-	w.write('RMSE: {0:.1f}'.format(calculated_rmse))
+	w.write('RMSE: {0:.2f}'.format(calculated_rmse))
