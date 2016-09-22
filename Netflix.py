@@ -66,7 +66,8 @@ def rmse(act, pred):
 
 
 	ans = sqrt(mean(square(subtract(act, pred))))
-	return round(ans, 2)
+	ans = '{0:.2f}'.format(int(ans*100)/float(100))
+	return float(ans)
 
 def netflix_eval(customer_id):
 	# Add in the actual value to the actual array so that we can calculate rmse later
@@ -80,7 +81,8 @@ def netflix_eval(customer_id):
 	except Exception as e:
 		return -1
 
-	pred = round(pred, 1)
+	pred = '{0:.2f}'.format(int(pred*100)/float(100))
+	pred = float(pred)
 
 	actual.append(actual_custmovid[(customer_id, curr_mov_id)])
 	predicted.append(pred)
