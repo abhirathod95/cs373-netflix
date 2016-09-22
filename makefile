@@ -85,5 +85,10 @@ status:
 	git remote -v
 	git status
 
+versions:
+	pip --version
+	coverage --version
+	pylint --version
+
 #test: scrub Netflix.html Netflix.log RunNetflix.tmp TestNetflix.tmp netflix-tests check
 test: scrub TestNetflix.tmp
