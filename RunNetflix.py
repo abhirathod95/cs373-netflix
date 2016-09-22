@@ -1,10 +1,10 @@
 import sys
 
-from Netflix import netflix_solve, netflix_read, rmse, netflix_print
+from Netflix import netflix_solve
 
 # ----
 # main
 # ----
 
 if __name__ == "__main__":
-    netflix_solve(sys.stdin, sys.stdout)
+	netflix_solve(sys.stdin, sys.stdout)
