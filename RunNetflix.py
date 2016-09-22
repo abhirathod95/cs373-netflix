@@ -7,4 +7,4 @@ from Netflix import netflix_solve
 # ----
 
 if __name__ == "__main__":
-	netflix_solve(sys.stdin, sys.stdout)
+    netflix_solve(sys.stdin, sys.stdout)
