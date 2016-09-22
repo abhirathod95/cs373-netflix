@@ -15,11 +15,10 @@ class TestNetflix (TestCase):
 	##########
 
 	# Check if it reads movie ids correctly
-	# Should just ignore it (return -1) and save it internally
 	def test_read_1(self):
 		line = '2:'
 		num = netflix_read(line)
-		self.assertEqual(num, -1)
+		self.assertEqual(num, 2)
 
 	# Check if it reads customer ids correctly
 	# Should return the customer id as an int

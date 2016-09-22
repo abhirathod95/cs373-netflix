@@ -4,6 +4,7 @@ import requests
 from numpy import mean, sqrt, square, subtract
 
 curr_mov_id = -1
+movie = False
 actual = []
 predicted = []
 
@@ -20,7 +21,7 @@ def netflix_read(line):
 	line is a string for the current line in the file
 	returns an int (the id of the movie; -1 if the line is movie id)
 	"""
-	global curr_mov_id
+	global curr_mov_id, movie
 	if ':' in line:
 		ids = line.split(':')
 		# Make sure its an int
@@ -32,7 +33,8 @@ def netflix_read(line):
 		if num < 1 or num > 17770:
 			return -1
 		curr_mov_id = num
-		return -1
+		movie = True
+		return num
 	else:
 		line = line.strip()
 		# Make sure its an int 
@@ -43,7 +45,7 @@ def netflix_read(line):
 		# Make sure that its within the range of the customer ids
 		if num < 1 or num > 2649429:
 			return -1
-		return int(line)
+		return num
 
 
 def rmse(act, pred):
@@ -65,14 +67,22 @@ def rmse(act, pred):
 
 
 	ans = sqrt(mean(square(subtract(act, pred))))
-	rm = '{0:.2f}'.format(ans)
-	return float(rm)
+	return round(ans, 2)
 
 def netflix_eval(customer_id):
 	# Add in the actual value to the actual array so that we can calculate rmse later
 	global actual, predicted
+
+	avg_mov_rating = avgmov_movid[curr_mov_id]
+	avg_cust_rating = avgcust_custid[customer_id]
+
+	pred = (avg_cust_rating + avg_mov_rating) / 2
+	pred = round(pred, 1)
+
 	actual.append(actual_custmovid[(customer_id, curr_mov_id)])
-	return -1
+	predicted.append(pred)
+
+	return pred
 
 def netflix_print(w, i):
 	"""
@@ -81,7 +91,13 @@ def netflix_print(w, i):
 	i the movie id
 	j the customer id
 	"""
-	w.write(str(i) + " " + str(curr_mov_id) + " " + "\n")
+	global movie
+
+	if movie:
+		w.write(str(i) + ":\n")
+		movie = False
+	else:
+		w.write(str(i) + "\n")
 
 def netflix_solve(r, w):
 	"""
@@ -92,6 +108,8 @@ def netflix_solve(r, w):
 	for s in r:
 		i = netflix_read(s)
 		if i != -1 and curr_mov_id != -1:
+			if not movie:
+				i = netflix_eval(i)
 			netflix_print(w, i)
-	#calculated_rmse = rmse(actual, predicted)
-	#print('RMSE: {0:.2f}'.format(calculated_rmse))
+	calculated_rmse = rmse(actual, predicted)
+	print('RMSE: {0:.2f}'.format(calculated_rmse))

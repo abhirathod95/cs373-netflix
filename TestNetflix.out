@@ -5,7 +5,7 @@ Ran 14 tests in 0.001s
 OK
 Name             Stmts   Miss Branch BrPart  Cover   Missing
 ------------------------------------------------------------
-Netflix.py          52      7     16      0    84%   74-75, 84, 92-95
-TestNetflix.py      59      3      2      1    93%   45-47, 99->exit
+Netflix.py          65     19     20      0    68%   76-85, 96-100, 108-115
+TestNetflix.py      59      3      2      1    93%   44-46, 98->exit
 ------------------------------------------------------------
-TOTAL              111     10     18      1    88%
+TOTAL              124     22     22      1    79%
