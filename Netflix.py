@@ -82,6 +82,12 @@ def rmse(act, pred):
 	return float(ans)
 
 def netflix_eval(customer_id):
+	"""
+	Takes in a float/int that is the customer id
+	Uses calculations to predict what the customer would rate the movie that we are on and is 
+	stored in curr_mov_id
+	Returns a 1 decimal place that is the predicted value for this customer id
+	"""
 	# Add in the actual value to the actual array so that we can calculate rmse later
 	global actual, predicted
 
@@ -102,10 +108,10 @@ def netflix_eval(customer_id):
 
 def netflix_print(w, movieFlag, i):
 	"""
-	print three ints
+	print movie id with colon or customer id
 	w a writer
-	i the movie id
-	j the customer id
+	movieFlag is a boolean that tells us if we are printing a movie id or not
+	i is the id
 	"""
 	if movieFlag:
 		w.write(str(i) + ":\n")

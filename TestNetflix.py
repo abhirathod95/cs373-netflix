@@ -121,25 +121,25 @@ class TestNetflix (TestCase):
 		r = StringIO("")
 		w = StringIO()
 		netflix_solve(r, w)
-		self.assertEqual(w.getvalue(), "RMSE: 0.0")
+		self.assertEqual(w.getvalue(), "RMSE: 0.00")
 
 	def test_solve_2(self):
 		r = StringIO("10343:\n887364\n")
 		w = StringIO()
 		netflix_solve(r, w)
-		self.assertEqual(w.getvalue(), "10343:\n3.2\nRMSE: 0.2")
+		self.assertEqual(w.getvalue(), "10343:\n3.0\nRMSE: 0.00")
 
 	def test_solve_3(self):
 		r = StringIO("12033:\n1010799\n1649947")
 		w = StringIO()
 		netflix_solve(r, w)
-		self.assertEqual(w.getvalue(), "12033:\n2.3\n2.6\nRMSE: 0.4")
+		self.assertEqual(w.getvalue(), "12033:\n1.1\n1.8\nRMSE: 0.53")
 
 	def test_solve_4(self):
 		r = StringIO("12033:\n1010799\n1649947\n123")
 		w = StringIO()
 		netflix_solve(r, w)
-		self.assertEqual(w.getvalue(), "12033:\n2.3\n2.6\nRMSE: 0.4")
+		self.assertEqual(w.getvalue(), "12033:\n1.1\n1.8\nRMSE: 0.58")
 
 
 if __name__ == "__main__":

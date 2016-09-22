@@ -1,0 +1,131 @@
+commit 68a0a07ab636e59982d301fc9e03e52f3fddbfc2
+Author: Abhirajsinh Rathod <starlord@cs.utexas.edu>
+Date:   Thu Sep 22 01:38:14 2016 -0500
+
+    Fixes #7; Added in the optimization for the solution. Looks like its getting relatively good scores on other people's tests and ours.
+
+commit bf42268463618e4f65e9c853f2c47903b4fde9f1
+Author: Abhirajsinh Rathod <starlord@cs.utexas.edu>
+Date:   Wed Sep 21 23:40:41 2016 -0500
+
+    Fixes #4; Added in acceptance tests to check the RMSE for the simplest solution. Moving on to #7
+
+commit 0522466e29a63ca2310cb5ec82f64dc937b507e8
+Author: Abhirajsinh Rathod <starlord@cs.utexas.edu>
+Date:   Wed Sep 21 23:14:08 2016 -0500
+
+    Fixes #18; Fixes #19; Had to change the string format to do 1 decimal places not 2 (the evilness of copying and pasting). Also had to change the solver to write to w and not just print rmse. That's why the test cases weren't passing
+
+commit e205ecbed76b223ff7a1dfd8974e920c091fa74e
+Author: Abhirajsinh Rathod <starlord@cs.utexas.edu>
+Date:   Wed Sep 21 22:56:33 2016 -0500
+
+    Changed the prediction to be 1 decimal place only and added in the rest of unit tests; Fixes #3
+
+commit d0a26fdb7efbd6f20d8f912c12dcef3e5f26afc8
+Author: ZENOSS\ajuarez <addjuarez@yahoo.com>
+Date:   Wed Sep 21 22:53:54 2016 -0500
+
+    finished rest of unit tests
+
+commit 367c3c4bd14ba9d77ff98b4ed0291a974cafd54d
+Author: Abhirajsinh Rathod <starlord@cs.utexas.edu>
+Date:   Wed Sep 21 22:45:07 2016 -0500
+
+    Changed the format of the flaots returned by rmse and pred so that they truncate to 2 decimal places and dont round up the hundreths place in the decimal:
+
+commit d8d9ed0b710d374ea4766076d95c9df23ce15a16
+Author: Abhirajsinh Rathod <starlord@cs.utexas.edu>
+Date:   Wed Sep 21 22:30:37 2016 -0500
+
+    Added in a try except to make sure that all customer ids being checked are in the cache (and thus part of probe.txt). Just in case.
+
+commit ab244a75a137138f27f2ccba106d639214a5df87
+Author: Abhirajsinh Rathod <starlord@cs.utexas.edu>
+Date:   Wed Sep 21 22:22:35 2016 -0500
+
+    Changed function definition for read so that it returns a flag that tells us if it was a movie id or customer id. Useful for unit testing and less global variables
+
+commit f346e7d094b6d4a870180055c33663281e76c6af
+Author: Abhirajsinh Rathod <starlord@cs.utexas.edu>
+Date:   Wed Sep 21 22:15:31 2016 -0500
+
+    Changed function definition for print so that it doesn't use the global movie flag automatically, but is passed in from solver. Allows for easier unit testing, and doesn't really impact the code flow much
+
+commit 29769573f699a3f3055ec2c5107eef5939b3a4ed
+Author: Abhirajsinh Rathod <starlord@cs.utexas.edu>
+Date:   Wed Sep 21 22:06:37 2016 -0500
+
+    Fixes #6; Implemented the most simple solution that takes into account the average rating for the customer and the average rating for the movie
+
+commit eec241fb8cff01b865066367981fdf63d3af544e
+Author: Abhirajsinh Rathod <starlord@cs.utexas.edu>
+Date:   Wed Sep 21 21:34:47 2016 -0500
+
+    Some issue with travis yml format. Changed it and checked validity online. Should work now
+
+commit 21fcd72ee713938bef9b203e576c511194e7622c
+Author: Abhirajsinh Rathod <starlord@cs.utexas.edu>
+Date:   Wed Sep 21 21:31:58 2016 -0500
+
+    Checked out the master branch to see that it was actually missing downloading requests in travis file. Changed it now, should fix #16
+
+commit 644c374561b011ff26994a17629ed43f125f17d9
+Author: Abhirajsinh Rathod <starlord@cs.utexas.edu>
+Date:   Wed Sep 21 21:29:51 2016 -0500
+
+    Removing pylint from makefile didn't work for #16. Trying out creating an alias now to see if that helps
+
+commit fb4f7808fdf129afbeeef34eb0883080c25de967
+Author: Abhirajsinh Rathod <starlord@cs.utexas.edu>
+Date:   Wed Sep 21 21:27:21 2016 -0500
+
+    Working towards #16; Trying out removing pylint from makefile to see if that works
+
+commit 9913bc774a14ef1d122c51445c176fb6607810d3
+Author: Abhirajsinh Rathod <starlord@cs.utexas.edu>
+Date:   Wed Sep 21 21:18:47 2016 -0500
+
+    Fixed the travis yml file to be the same as the one on piazza, but also added in permission settings for netflix files and added in versions in makefile so that the travis file can run that before script; Fixes #14
+
+commit cfe7718e3b8e44a515e228718305cad1f7682e9e
+Author: Abhirajsinh Rathod <starlord@cs.utexas.edu>
+Date:   Wed Sep 21 21:13:13 2016 -0500
+
+    Changed make file to include pylint. We had initially removed it at the start, but looks like its needed based on the new travis file; Fixes #15
+
+commit 03e67e4e9925e09782dd39aa1c0f6b897e62d4f0
+Author: Abhirajsinh Rathod <starlord@cs.utexas.edu>
+Date:   Wed Sep 21 21:07:07 2016 -0500
+
+    Fixes #13; Figured out that numpy functions do indeed accept python lists. No need to add in any extra code. Also added in more tests for #3 and fixed some more stuff in Netflix.py
+
+commit 06a6ad5571db208375c2424ffc31629c926bb301
+Author: Abhi Rathod <abhirathod95@gmail.com>
+Date:   Wed Sep 21 19:11:41 2016 -0500
+
+    Working towards #4; Added in a few unit tests and fixed up a lot of the code in Netflix.py to cover corner cases
+
+commit 42e9bac0e790f61e3debdd621649563f55b8ec89
+Author: Abhirajsinh Rathod <starlord@cs.utexas.edu>
+Date:   Wed Sep 21 00:37:11 2016 -0500
+
+    Added in skeleton functions and collected some of the useful caches from the cache center
+
+commit bc031d9d685e3276a6449d9f4b9e5dec7b9aa3c9
+Author: Abhirajsinh Rathod <starlord@cs.utexas.edu>
+Date:   Tue Sep 20 22:05:55 2016 -0500
+
+    Fixed an issue in the yml file where it changed permission on testnetflix and runnetflix but those files werent created yet. Added those files in. Fixes #1
+
+commit 64d209f5d96ab3fd89afc1358b4dbe2d348c5cf3
+Author: Abhirajsinh Rathod <starlord@cs.utexas.edu>
+Date:   Tue Sep 20 21:58:51 2016 -0500
+
+    Fixes #1; Added in the yml and a basic makefile. Should be a successful build on travis
+
+commit a245befff08c8820b20ffd5ef5c2689706951409
+Author: Addison Juarez <addjuare@cs.utexas.edu>
+Date:   Tue Sep 20 21:36:50 2016 -0500
+
+    Finished part of #1
