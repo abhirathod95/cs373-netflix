@@ -12,6 +12,9 @@ FILES :=                              \
  #   netflix-tests/ajr3334-TestCollatz.out \
  #   netflix-tests/ajr3334-TestCollatz.py  \
 
+.pylintrc:
+	pylint --disable=bad-whitespace,missing-docstring,pointless-string-statement --reports=n --generate-rcfile > $@
+
 netflix-tests:
 	git clone https://github.com/CS373-Fall-2016/netflix-tests.git
 
@@ -22,10 +25,14 @@ Netflix.log:
 	git log > Netflix.log
 
 RunNetflix.tmp: RunNetflix.in RunNetflix.out RunNetflix.py
+	-pylint Netflix.py
+	-pylint RunNetflix.py
 	./RunNetflix.py < RunNetflix.in > RunNetflix.tmp
 	diff RunNetflix.tmp RunNetflix.out
 
 TestNetflix.tmp: TestNetflix.py
+	-pylint Netflix.py
+	-pylint TestNetflix.py
 	python3.5 -m coverage run    --branch TestNetflix.py >  TestNetflix.tmp 2>&1
 	python3.5 -m coverage report -m --omit=/lusr/lib/python3.5/dist-packages/*,/home/travis/virtualenv/python3.5.0/lib/python3.5/site-packages/* >> TestNetflix.tmp
 	cat TestNetflix.tmp 					 >  TestNetflix.out

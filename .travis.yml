@@ -1,17 +1,27 @@
+sudo: false
+
 language: python
+
 python:
-  - "3.5"
+   - "3.5"
+
+before_install:
+    - pip install --upgrade pip
 
 install:
-  - pip install --upgrade pip
-  - pip --version
-  - pip install coverage
-  - pip install numpy
-  - pip install requests
-
-script:
-  - make test
+    - pip install autopep8
+    - pip install coverage
+    - pip install numpy
+    - pip install pylint
 
 before_script:
-  - chmod +x RunNetflix.py
-  - chmod +x TestNetflix.py
+    - uname -a
+    - printenv | sort
+    - make versions
+    - chmod +x RunNetflix.py
+    - chmod +x TestNetflix.py
+
+script:
+    - date
+    - ls -al
+    - make test
