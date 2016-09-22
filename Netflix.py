@@ -6,21 +6,13 @@ from numpy import mean, sqrt, square, subtract
 curr_mov_id = -1
 actual = []
 predicted = []
-actual_custmovid = None
-avgcust_custid = None
-avgmov_movid = None
 
-def init_caches():
-	"""
-	The function initializes all the caches (from the internet) used in this program 
-	"""
-	global actual_custmovid, avgcust_custid, avgmov_movid
-	bytes = requests.get('http://www.cs.utexas.edu/users/fares/netflix-caches/snm2235-jml4759-actualCustomerRating.pickle').content
-	actual_custmovid = pickle.loads(bytes)
-	bytes = requests.get('http://www.cs.utexas.edu/users/fares/netflix-caches/snm2235-jml4759-averageCustomerRating.pickle').content
-	avgcust_custid = pickle.loads(bytes)
-	bytes = requests.get('http://www.cs.utexas.edu/users/fares/netflix-caches/snm2235-jml4759-averageMovieRating.pickle').content
-	avgmov_movid = pickle.loads(bytes)
+bytes = requests.get('http://www.cs.utexas.edu/users/fares/netflix-caches/snm2235-jml4759-actualCustomerRating.pickle').content
+actual_custmovid = pickle.loads(bytes)
+bytes = requests.get('http://www.cs.utexas.edu/users/fares/netflix-caches/snm2235-jml4759-averageCustomerRating.pickle').content
+avgcust_custid = pickle.loads(bytes)
+bytes = requests.get('http://www.cs.utexas.edu/users/fares/netflix-caches/snm2235-jml4759-averageMovieRating.pickle').content
+avgmov_movid = pickle.loads(bytes)
 	
 def netflix_read(line):
 	"""
@@ -61,20 +53,20 @@ def rmse(act, pred):
 	"""
 
 	# Make sure the params are lists
-	assert(type(act) == list)
-	assert(type(pred) == list)
+	if(type(act) != list or type(pred) != list): 
+		return 0;
 
-	# If either of the lists are empty, set them to list of zeros
-	# of size the other list. If both are empty, return 0
+	# If either of the lists are empty, return 0
 	if not act or not pred:
-		if act and not pred:
-			pred = [0 for x in act]
-		elif pred and not act:
-			act = [0 for x in pred]
-		else:
-			return 0
+		return 0;
 
-	return sqrt(mean(square(subtract(act, pred))))
+	if len(act) != len(pred):
+		return 0;
+
+
+	ans = sqrt(mean(square(subtract(act, pred))))
+	rm = '{0:.2f}'.format(ans)
+	return float(rm)
 
 def netflix_eval(customer_id):
 	# Add in the actual value to the actual array so that we can calculate rmse later
@@ -97,7 +89,6 @@ def netflix_solve(r, w):
 	w a writer
 	"""
 	global actual, predicted
-	init_caches()
 	for s in r:
 		i = netflix_read(s)
 		if i != -1 and curr_mov_id != -1:

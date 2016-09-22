@@ -27,7 +27,7 @@ RunNetflix.tmp: RunNetflix.in RunNetflix.out RunNetflix.py
 
 TestNetflix.tmp: TestNetflix.py
 	python3.5 -m coverage run    --branch TestNetflix.py >  TestNetflix.tmp 2>&1
-	python3.5 -m coverage report -m                      >> TestNetflix.tmp
+	python3.5 -m coverage report -m --omit=/lusr/lib/python3.5/dist-packages/*,/home/travis/virtualenv/python3.5.0/lib/python3.5/site-packages/* >> TestNetflix.tmp
 	cat TestNetflix.tmp 					 >  TestNetflix.out
 	cat TestNetflix.tmp
 
@@ -79,4 +79,4 @@ status:
 	git status
 
 #test: scrub Netflix.html Netflix.log RunNetflix.tmp TestNetflix.tmp netflix-tests check
-test: scrub
+test: scrub TestNetflix.tmp

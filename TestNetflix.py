@@ -1,7 +1,7 @@
 from io import StringIO
 from unittest import main, TestCase
 
-from Netflix import collatz_read, netflix_read, netflix_print, netflix_solve, rmse
+from Netflix import netflix_read, netflix_print, netflix_solve, rmse
 
 # ------------
 # TestCollatz
@@ -36,13 +36,13 @@ class TestNetflix (TestCase):
 
 	# check the upper range for movie ids
 	def test_read_4(self):
-		line = '17771'
+		line = '17771:'
 		num = netflix_read(line)
 		self.assertEqual(num, -1)
 
 	# check lower bounds of customer ids
 	def test_read_5(self):
-		line = '0'
+		line = '0:'
 		num = netflix_read(line)
 		self.assertEqual(num, -1)
 
@@ -58,23 +58,43 @@ class TestNetflix (TestCase):
 		num = netflix_read(line)
 		self.assertEqual(num, -1)
 
+	def test_read_7(self):
+		line = 'adsabdaca:'
+		num = netflix_read(line)
+		self.assertEqual(num, -1)
+
+
 
 	##########
 	## RMSE ##
 	##########
+	def test_rmse_1(self):
+		ans = rmse([1,2,4,5], [1,2,3,4,5,6,7])
+		self.assertEqual(ans, 0)
+
 	def test_rmse_2(self):
 		ans = rmse([1,2,3,4], [])
-		self.assertEqual(ans, 2.73)
+		self.assertEqual(ans, 0)
 
 	def test_rmse_3(self):
 		ans = rmse([], [1,2,3,4])
-		self.assertEqual(ans, 2.73)
-
-	def test_rmse_1(self):
-		ans = rmse([],[])
 		self.assertEqual(ans, 0)
 
 	def test_rmse_4(self):
+		ans = rmse([],[])
+		self.assertEqual(ans, 0)
+
+	def test_rmse_5(self):
 		ans = rmse(None, None)
 		self.assertEqual(ans, 0)
 
+	def test_rmse_6(self):
+		ans = rmse([1,2,3,4],[1,2,3,4])
+		self.assertEqual(ans, 0)
+
+	def test_rmse_7(self):
+		ans = rmse([1,2,3,4], [5,6,7,8])
+		self.assertEqual(ans, 4.0)
+
+if __name__ == "__main__":
+    main()
