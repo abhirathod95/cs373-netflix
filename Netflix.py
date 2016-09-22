@@ -72,10 +72,14 @@ def netflix_eval(customer_id):
 	# Add in the actual value to the actual array so that we can calculate rmse later
 	global actual, predicted
 
-	avg_mov_rating = avgmov_movid[curr_mov_id]
-	avg_cust_rating = avgcust_custid[customer_id]
+	try:
+		avg_mov_rating = avgmov_movid[curr_mov_id]
+		avg_cust_rating = avgcust_custid[customer_id]
 
-	pred = (avg_cust_rating + avg_mov_rating) / 2
+		pred = (avg_cust_rating + avg_mov_rating) / 2
+	except Exception as e:
+		return -1
+
 	pred = round(pred, 1)
 
 	actual.append(actual_custmovid[(customer_id, curr_mov_id)])
@@ -106,6 +110,7 @@ def netflix_solve(r, w):
 		if i != -1 and curr_mov_id != -1:
 			if not movie:
 				i = netflix_eval(i)
-			netflix_print(w, movie, i)
+			if i != -1:
+				netflix_print(w, movie, i)
 	calculated_rmse = rmse(actual, predicted)
 	print('RMSE: {0:.2f}'.format(calculated_rmse))
