@@ -21,7 +21,6 @@ before_script:
     - make versions
     - chmod +x RunNetflix.py
     - chmod +x TestNetflix.py
-    - chmod +x Netflix.html
     - alias python3.5='python'
 
 script:
