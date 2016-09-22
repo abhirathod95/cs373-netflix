@@ -115,4 +115,4 @@ def netflix_solve(r, w):
 			if i != -1:
 				netflix_print(w, movie, i)
 	calculated_rmse = rmse(actual, predicted)
-	print('RMSE: {0:.2f}'.format(calculated_rmse))
+	w.write('RMSE: {0:.1f}'.format(calculated_rmse))
