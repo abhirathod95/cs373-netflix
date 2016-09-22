@@ -1,6 +1,7 @@
 import sys
 import pickle
 import requests
+from numpy import mean, sqrt, square, subtract
 
 curr_mov_id = -1
 actual = []
@@ -58,6 +59,21 @@ def rmse(act, pred):
 	Calculates the rmse of all the actual and predicted values stored so far
 	Returns a float 
 	"""
+
+	# Make sure the params are lists
+	assert(type(act) == list)
+	assert(type(pred) == list)
+
+	# If either of the lists are empty, set them to list of zeros
+	# of size the other list. If both are empty, return 0
+	if not act or not pred:
+		if act and not pred:
+			pred = [0 for x in act]
+		elif pred and not act:
+			act = [0 for x in pred]
+		else:
+			return 0
+
 	return sqrt(mean(square(subtract(act, pred))))
 
 def netflix_eval(customer_id):
@@ -87,9 +103,4 @@ def netflix_solve(r, w):
 		if i != -1 and curr_mov_id != -1:
 			netflix_print(w, i)
 	#calculated_rmse = rmse(actual, predicted)
-
 	#print('RMSE: {0:.2f}'.format(calculated_rmse))
-		#v = collatz_eval(i, j)
-		# -1 for invalid case we just don't print
-		#if v != -1:
-		#    collatz_print(w, i, j, v)

@@ -1,6 +1,6 @@
 import sys
 
-from Netflix import netflix_solve
+from Netflix import netflix_read, rmse, netflix_print
 
 # ----
 # main

@@ -21,7 +21,7 @@ Netflix.html: Netflix.py
 Netflix.log:
 	git log > Netflix.log
 
-RunCollatz.tmp: RunNetflix.in RunNetflix.out RunNetflix.py
+RunNetflix.tmp: RunNetflix.in RunNetflix.out RunNetflix.py
 	./RunNetflix.py < RunNetflix.in > RunNetflix.tmp
 	diff RunNetflix.tmp RunNetflix.out
 
@@ -79,4 +79,4 @@ status:
 	git status
 
 #test: scrub Netflix.html Netflix.log RunNetflix.tmp TestNetflix.tmp netflix-tests check
-test: scrub 
+test: scrub
